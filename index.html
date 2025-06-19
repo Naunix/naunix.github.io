@@ -7,67 +7,37 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
     body { font-family: 'Inter', sans-serif; }
     #preloader {
-      position: fixed;
-      top: 0; left: 0;
+      position: fixed; top: 0; left: 0;
       width: 100%; height: 100%;
       background: #000;
       z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
     }
-    .yx {
-      font-size: 6rem;
-      color: #fff;
-      position: relative;
+    .yx { font-size: 6rem; color: #fff; position: relative;
       animation: flicker 3s infinite, pulse 2s infinite;
-      text-shadow:
-        0 0 5px #fff,
-        0 0 10px #fff,
-        0 0 20px #fff,
-        0 0 40px #fff;
-    }
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff; }
     .yx::before {
-      content: 'YX';
-      position: absolute;
-      top: 0;
-      left: 0;
-      filter: blur(4px);
-      opacity: 0.3;
-      z-index: -1;
-      animation: drip 4s infinite;
-      text-shadow:
-        0 0 8px #fff,
-        0 0 15px #fff,
-        0 0 30px #fff;
+      content: 'YX'; position: absolute; top: 0; left: 0; filter: blur(4px);
+      opacity: 0.3; z-index: -1; animation: drip 4s infinite;
+      text-shadow: 0 0 8px #fff, 0 0 15px #fff, 0 0 30px #fff;
     }
-    @keyframes flicker {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
+    @keyframes flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
     @keyframes drip {
       0% { transform: translate(0, 0) scale(1); }
       50% { transform: translate(5px, 5px) scale(1.1); opacity: 0.2; }
       100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
     }
     .btn-neon {
-      background: #00ffe7;
-      color: #000;
-      transition: all 0.3s ease-in-out;
-      animation: blink-scale 2s infinite;
+      background: #00ffe7; color: #000;
+      transition: all 0.3s ease-in-out; animation: blink-scale 2s infinite;
     }
     .btn-neon:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px #00ffe7;
-      animation: none;
+      transform: scale(1.05); box-shadow: 0 0 20px #00ffe7; animation: none;
     }
     @keyframes blink-scale {
       0% { transform: scale(1); opacity: 1; }
@@ -77,36 +47,55 @@
   </style>
 </head>
 <body class="bg-gray-900 text-white overflow-x-hidden">
-
-  <div id="preloader">
-    <div class="yx">YX</div>
-  </div>
-
+  <div id="preloader"><div class="yx">YX</div></div>
   <div id="app" class="hidden">
-    <section class="container mx-auto px-6 py-12 text-center" data-aos="fade-up">
+    <header class="container mx-auto py-6 flex justify-between items-center" data-aos="fade-down">
+      <h1 class="text-2xl font-bold">Мастер-класс</h1>
+      <nav><ul class="flex gap-6">
+        <li><a href="#about" class="hover:text-[#00ffe7]">О курсе</a></li>
+        <li><a href="#schedule" class="hover:text-[#00ffe7]">Расписание</a></li>
+        <li><a href="#faq" class="hover:text-[#00ffe7]">FAQ</a></li>
+      </ul></nav>
+    </header>
+
+    <section class="container mx-auto px-6 py-12 text-center" data-aos="fade-up" data-aos-delay="300">
       <h2 class="text-4xl md:text-6xl font-bold mb-6">Научитесь создавать сайты за 3 дня</h2>
       <p class="text-lg md:text-xl mb-8">Прокачайте навыки с нуля до первого проекта</p>
       <button class="btn-neon py-3 px-8 rounded-full text-lg" onclick="scrollToForm()">Зарегистрироваться</button>
+    </section>
+
+    <section id="about" class="container mx-auto px-6 py-12 bg-gray-800 rounded-lg my-12" data-aos="fade-right">
+      <h3 class="text-3xl font-bold mb-4">Что вас ждет?</h3>
+      <div class="grid md:grid-cols-2 gap-8 mt-6">
+        <div data-aos="fade-up"><h4 class="text-xl font-semibold mb-2">Практика</h4><p>Реальные проекты, которые войдут в ваш портфолио</p></div>
+        <div data-aos="fade-up" data-aos-delay="200"><h4 class="text-xl font-semibold mb-2">Менторство</h4><p>Персональные рекомендации от опытных разработчиков</p></div>
+      </div>
     </section>
 
     <section id="register" class="container mx-auto px-6 py-12" data-aos="zoom-in">
       <h3 class="text-3xl font-bold mb-6 text-center">Регистрация</h3>
       <form id="registrationForm" class="max-w-2xl mx-auto" onsubmit="submitForm(event)">
         <div class="mb-4" data-aos="fade-up">
-          <label class="block mb-2" for="name">Имя</label>
-          <input type="text" id="name" required class="w-full p-3 rounded bg-gray-700 border border-gray-600">
+          <label class="block mb-2">Имя</label>
+          <input id="name" type="text" required class="w-full p-3 rounded bg-gray-700 border border-gray-600">
         </div>
         <div class="mb-4" data-aos="fade-up" data-aos-delay="200">
-          <label class="block mb-2" for="email">Email</label>
-          <input type="email" id="email" required class="w-full p-3 rounded bg-gray-700 border border-gray-600">
+          <label class="block mb-2">Email</label>
+          <input id="email" type="email" required class="w-full p-3 rounded bg-gray-700 border border-gray-600">
         </div>
         <div class="mb-6" data-aos="fade-up" data-aos-delay="400">
-          <label class="block mb-2" for="phone">Телефон</label>
-          <input type="tel" id="phone" required class="w-full p-3 rounded bg-gray-700 border border-gray-600">
+          <label class="block mb-2">Телефон</label>
+          <input id="phone" type="tel" required class="w-full p-3 rounded bg-gray-700 border border-gray-600">
         </div>
         <button type="submit" class="btn-neon w-full py-3 rounded-full text-lg">Отправить</button>
       </form>
     </section>
+
+    <footer class="bg-gray-800 py-8" data-aos="fade-up">
+      <div class="container mx-auto px-6 text-center">
+        <p>&copy; 2024 Мастер-класс. Все права защищены.</p>
+      </div>
+    </footer>
   </div>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -128,14 +117,9 @@
 
     function submitForm(e) {
       e.preventDefault();
-      const name = document.getElementById("name")?.value.trim();
-      const email = document.getElementById("email")?.value.trim();
-      const phone = document.getElementById("phone")?.value.trim();
-
-      console.log("📤 Имя:", name);
-      console.log("📤 Email:", email);
-      console.log("📤 Телефон:", phone);
-      console.log("📦 Telegram.WebApp:", Telegram?.WebApp);
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
 
       if (!name || !email || !phone) {
         alert("Пожалуйста, заполните все поля.");
@@ -143,12 +127,12 @@
       }
 
       const data = { name, email, phone };
+
       if (Telegram && Telegram.WebApp) {
         Telegram.WebApp.sendData(JSON.stringify(data));
         document.getElementById("registrationForm").innerHTML = "<p class='text-center text-green-400'>✅ Спасибо за регистрацию!</p>";
       } else {
-        alert("❌ Откройте в Telegram");
-        console.warn("Telegram.WebApp не доступен");
+        alert("❌ Ошибка: Telegram WebApp API недоступен.");
       }
     }
   </script>
