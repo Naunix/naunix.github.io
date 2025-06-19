@@ -4,65 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Мастер-класс</title>
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- AOS -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
-    /* Прелоадер с анимацией YX */
-    #preloader { 
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: #000;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .yx {
-      font-size: 6rem;
-      color: #fff;
-      position: relative;
-      animation: flicker 3s infinite, pulse 2s infinite;
-      text-shadow:
-        0 0 5px #fff,
-        0 0 10px #fff,
-        0 0 20px #fff,
-        0 0 40px #fff;
-    }
-    .yx::before {
-      content: 'YX';
-      position: absolute;
-      top: 0;
-      left: 0;
-      filter: blur(4px);
-      opacity: 0.3;
-      z-index: -1;
-      animation: drip 4s infinite;
-      text-shadow:
-        0 0 8px #fff,
-        0 0 15px #fff,
-        0 0 30px #fff;
-    }
-    @keyframes flicker {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-    @keyframes drip {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(5px, 5px) scale(1.1); opacity: 0.2; }
-      100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
-    }
-    /* Кнопка с анимацией */
     .btn-neon {
       background: #00ffe7;
       color: #000;
@@ -81,104 +26,61 @@
     }
   </style>
 </head>
-<body class="bg-gray-900 text-white overflow-x-hidden">
+<body class="bg-gray-900 text-white">
 
-  <!-- Прелоадер с YX -->
-  <div id="preloader">
-    <div class="yx">YX</div>
-  </div>
+  <section class="container mx-auto px-6 py-12 text-center">
+    <h2 class="text-4xl md:text-6xl font-bold mb-6">Научитесь создавать сайты за 3 дня</h2>
+    <p class="text-lg md:text-xl mb-8">Прокачайте навыки с нуля до первого проекта</p>
+    <button class="btn-neon py-3 px-8 rounded-full text-lg" onclick="scrollToForm()">Зарегистрироваться</button>
+  </section>
 
-  <!-- Основной контент -->
-  <div id="app" class="hidden">
-    <!-- Header -->
-    <header class="container mx-auto py-6 flex justify-between items-center" data-aos="fade-down">
-      <h1 class="text-2xl font-bold">Мастер-класс</h1>
-      <nav>
-        <ul class="flex gap-6">
-          <li><a href="#about" class="hover:text-[#00ffe7]">О курсе</a></li>
-          <li><a href="#schedule" class="hover:text-[#00ffe7]">Расписание</a></li>
-          <li><a href="#faq" class="hover:text-[#00ffe7]">FAQ</a></li>
-        </ul>
-      </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="container mx-auto px-6 py-12 text-center" data-aos="fade-up" data-aos-delay="300">
-      <h2 class="text-4xl md:text-6xl font-bold mb-6">Научитесь создавать сайты за 3 дня</h2>
-      <p class="text-lg md:text-xl mb-8">Прокачайте навыки с нуля до первого проекта</p>
-      <button class="btn-neon py-3 px-8 rounded-full text-lg" onclick="scrollToForm()">Зарегистрироваться</button>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="container mx-auto px-6 py-12 bg-gray-800 rounded-lg my-12" data-aos="fade-right">
-      <h3 class="text-3xl font-bold mb-4">Что вас ждет?</h3>
-      <div class="grid md:grid-cols-2 gap-8 mt-6">
-        <div data-aos="fade-up">
-          <h4 class="text-xl font-semibold mb-2">Практика</h4>
-          <p>Реальные проекты, которые войдут в ваш портфолио</p>
-        </div>
-        <div data-aos="fade-up" data-aos-delay="200">
-          <h4 class="text-xl font-semibold mb-2">Менторство</h4>
-          <p>Персональные рекомендации от опытных разработчиков</p>
-        </div>
+  <section id="register" class="container mx-auto px-6 py-12">
+    <h3 class="text-3xl font-bold mb-6 text-center">Регистрация</h3>
+    <form id="registrationForm" class="max-w-2xl mx-auto" onsubmit="submitForm(event)">
+      <div class="mb-4">
+        <label class="block mb-2" for="name">Имя</label>
+        <input type="text" id="name" required class="w-full p-3 rounded bg-gray-700 border border-gray-600">
       </div>
-    </section>
-
-    <!-- Registration Form -->
-    <section id="register" class="container mx-auto px-6 py-12" data-aos="zoom-in">
-      <h3 class="text-3xl font-bold mb-6 text-center">Регистрация</h3>
-      <form id="registrationForm" class="max-w-2xl mx-auto" onsubmit="submitForm(event)">
-        <div class="mb-4" data-aos="fade-up">
-          <label class="block mb-2">Имя</label>
-          <input type="text" required class="w-full p-3 rounded bg-gray-700 border border-gray-600">
-        </div>
-        <div class="mb-4" data-aos="fade-up" data-aos-delay="200">
-          <label class="block mb-2">Email</label>
-          <input type="email" required class="w-full p-3 rounded bg-gray-700 border border-gray-600">
-        </div>
-        <div class="mb-6" data-aos="fade-up" data-aos-delay="400">
-          <label class="block mb-2">Телефон</label>
-          <input type="tel" required class="w-full p-3 rounded bg-gray-700 border border-gray-600">
-        </div>
-        <button type="submit" class="btn-neon w-full py-3 rounded-full text-lg">Отправить</button>
-      </form>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 py-8" data-aos="fade-up">
-      <div class="container mx-auto px-6 text-center">
-        <p>&copy; 2024 Мастер-класс. Все права защищены.</p>
+      <div class="mb-4">
+        <label class="block mb-2" for="email">Email</label>
+        <input type="email" id="email" required class="w-full p-3 rounded bg-gray-700 border border-gray-600">
       </div>
-    </footer>
-  </div>
+      <div class="mb-6">
+        <label class="block mb-2" for="phone">Телефон</label>
+        <input type="tel" id="phone" required class="w-full p-3 rounded bg-gray-700 border border-gray-600">
+      </div>
+      <button type="submit" class="btn-neon w-full py-3 rounded-full text-lg">Отправить</button>
+    </form>
+  </section>
 
-  <!-- Scripts -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
   <script>
-    // Анимации AOS
-    AOS.init();
-
-    // Прелоадер
-    window.addEventListener('load', () => {
-      const preloader = document.getElementById('preloader');
-      const app = document.getElementById('app');
-      setTimeout(() => {
-        preloader.style.opacity = '0';
-        preloader.style.pointerEvents = 'none';
-        app.classList.remove('hidden');
-      }, 2000);
-    });
-
-    // Плавный скролл
     function scrollToForm() {
       document.getElementById('register').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Отправка формы
     function submitForm(e) {
       e.preventDefault();
-      const form = document.getElementById('registrationForm');
-      form.innerHTML = '<p class="text-center text-green-400">Спасибо за регистрацию! Мы свяжемся с вами.</p>';
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+
+      if (!name || !email || !phone) {
+        alert("Пожалуйста, заполните все поля.");
+        return;
+      }
+
+      const data = { name, email, phone };
+      console.log("📤 Отправка данных:", data);
+      console.log("📦 Telegram.WebApp объект:", Telegram?.WebApp);
+
+      if (Telegram && Telegram.WebApp) {
+        Telegram.WebApp.sendData(JSON.stringify(data));
+        document.getElementById("registrationForm").innerHTML = "<p class='text-center text-green-400'>✅ Спасибо за регистрацию!</p>";
+      } else {
+        alert("❌ Не удалось отправить данные через Telegram WebApp");
+        console.warn("Telegram.WebApp недоступен");
+      }
     }
   </script>
 </body>
