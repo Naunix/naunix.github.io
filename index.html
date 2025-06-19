@@ -61,9 +61,14 @@
     function submitForm(e) {
       e.preventDefault();
 
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const phone = document.getElementById("phone").value.trim();
+      const name = document.getElementById("name")?.value.trim();
+      const email = document.getElementById("email")?.value.trim();
+      const phone = document.getElementById("phone")?.value.trim();
+
+      console.log("🧪 Имя:", name);
+      console.log("🧪 Email:", email);
+      console.log("🧪 Телефон:", phone);
+      console.log("🧪 Telegram.WebApp:", Telegram?.WebApp);
 
       if (!name || !email || !phone) {
         alert("Пожалуйста, заполните все поля.");
@@ -71,17 +76,17 @@
       }
 
       const data = { name, email, phone };
-      console.log("📤 Отправка данных:", data);
-      console.log("📦 Telegram.WebApp объект:", Telegram?.WebApp);
+      console.log("📤 Отправка:", data);
 
       if (Telegram && Telegram.WebApp) {
         Telegram.WebApp.sendData(JSON.stringify(data));
-        document.getElementById("registrationForm").innerHTML = "<p class='text-center text-green-400'>✅ Спасибо за регистрацию!</p>";
+        document.getElementById("registrationForm").innerHTML = "<p class='text-green-400 text-center'>✅ Спасибо за регистрацию!</p>";
       } else {
-        alert("❌ Не удалось отправить данные через Telegram WebApp");
-        console.warn("Telegram.WebApp недоступен");
+        alert("❌ Не запущено внутри Telegram");
       }
     }
   </script>
+</body>
+</html>
 </body>
 </html>
